@@ -26,26 +26,31 @@
             <li><a class="dropdown-item" href="#">Ejemplo</a></li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('ads.create') }}">
+            New Ad
+          </a>
+        </li>
         @guest
-          @if (Route::has('login'))
-          <li class="nav-item ">
-            <a class="nav-link"
-            href="{{route('login')}}"><span>Login</span></a>
-          </li>
-          @endif    
-          @if (Route::has('register'))
-          <li class="nav-item">
-            <a class="nav-link"
-            href="{{route('register')}}"><span>Register</span></a>
-          </li>
-          @endif
+        @if (Route::has('login'))
+        <li class="nav-item ">
+          <a class="nav-link"
+          href="{{route('login')}}"><span>Login</span></a>
+        </li>
+        @endif    
+        @if (Route::has('register'))
+        <li class="nav-item">
+          <a class="nav-link"
+          href="{{route('register')}}"><span>Register</span></a>
+        </li>
+        @endif
         @else
-          <li class="nav-item">
-            <form id="logoutForm" action="{{route('logout')}}" method="POST">
-              @csrf
-            </form>
-            <a id="logoutBtn" class="nav-link" href="#">Logout</a>
-          </li>
+        <li class="nav-item">
+          <form id="logoutForm" action="{{route('logout')}}" method="POST">
+            @csrf
+          </form>
+          <a id="logoutBtn" class="nav-link" href="#">Logout</a>
+        </li>
         @endguest
       </ul>
     </div>
