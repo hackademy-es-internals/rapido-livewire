@@ -8,6 +8,7 @@
                         New Ad
                     </div>
                     <div class="card-body">
+                        <livewire:create-ad />
                     </div>
                 </div>
             </div>
