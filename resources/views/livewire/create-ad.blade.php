@@ -1,7 +1,12 @@
 <div>
+
+    @if (session()->has('message'))
+        <div class="alert alert-success" role="alert">
+            {{session('message')}}
+        </div>
+    @endif
     <form wire:submit.prevent="store">
         @csrf
-        
         <div class="mb-3">
             <label for="title" class="form-label">Title:</label>
             <input wire:model="title" type="text" class="form-control @error('title') is-invalid @enderror">
