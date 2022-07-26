@@ -26,11 +26,6 @@
             <li><a class="dropdown-item" href="#">Ejemplo</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('ads.create') }}">
-            New Ad
-          </a>
-        </li>
         @guest
         @if (Route::has('login'))
         <li class="nav-item ">
@@ -45,6 +40,11 @@
         </li>
         @endif
         @else
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('ads.create') }}">
+            New Ad
+          </a>
+        </li>
         <li class="nav-item">
           <form id="logoutForm" action="{{route('logout')}}" method="POST">
             @csrf

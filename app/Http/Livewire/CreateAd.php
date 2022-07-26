@@ -4,16 +4,19 @@ namespace App\Http\Livewire;
 
 use App\Models\Ad;
 use Livewire\Component;
+use App\Models\Category;
 
 class CreateAd extends Component
 {
     public $title;
     public $body;
     public $price;
+    public $category;
     
     protected $rules = [
         'title'=>'required|min:4',
         'body'=>'required|min:8',
+        'category'=>'required',
         'price'=>'required|numeric',
     ];
 
@@ -25,7 +28,9 @@ class CreateAd extends Component
 
     public function store()
     {
-        Ad::create([
+        $category = Category::find($this->category);
+
+        $category->ads()->create([
             'title'=>$this->title,
             'body'=>$this->body,
             'price'=>$this->price,
@@ -43,6 +48,7 @@ class CreateAd extends Component
     {
         $this->title = "";
         $this->body = "";
+        $this->category = "";
         $this->price = "";
     }
     public function render()
