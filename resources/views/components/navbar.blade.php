@@ -19,12 +19,11 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categorias
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Ejemplo</a></li>
-            <li><a class="dropdown-item" href="#">Ejemplo</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Ejemplo</a></li>
-          </ul>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          @foreach ($categories as $category)
+          <li><a class="dropdown-item" href="{{route('category.ads',$category)}}">{{$category->name}}</a></li>
+          @endforeach
+        </ul>
         </li>
         @guest
         @if (Route::has('login'))
