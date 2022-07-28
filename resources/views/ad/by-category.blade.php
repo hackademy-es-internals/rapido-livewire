@@ -22,7 +22,7 @@
                         <div class="card-subtitle mb-2">
                             <small>{{ $ad->user->name }}</small>
                         </div> 
-                        <a href="#" class="btn btn-primary">Show</a>
+                        <a href="{{route('ads.show',$ad)}}" class="btn btn-primary">Show more</a>
                     </div>
                 </div>
             </div>
