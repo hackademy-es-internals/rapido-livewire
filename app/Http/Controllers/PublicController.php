@@ -21,7 +21,7 @@ class PublicController extends Controller
     }
     
     public function adsByCategory(Category $category){
-        $ads = $category->ads()->paginate(1);
+        $ads = $category->ads()->latest()->paginate(1);
         return view('ad.by-category', compact ('category','ads'));
     }
     
