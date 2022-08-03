@@ -14,6 +14,7 @@
 </head>
 <body>
     <x-navbar />
+    <x-alert :type="session('type')" :message="session('message')"/>
     {{$slot}}
     <x-footer />
 

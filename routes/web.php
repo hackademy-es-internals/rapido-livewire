@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RevisorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::get('/ads/create', [AdController::class,'create'])->name('ads.create');
 Route::get('/ads/{ad}', [PublicController::class,'show'])->name("ads.show");
 
 Route::get('/category/{category:name}/ads', [PublicController::class,'adsByCategory'])->name('category.ads');
+
+Route::get('/revisor',[RevisorController::class,'index'] )->name('revisor.home');
