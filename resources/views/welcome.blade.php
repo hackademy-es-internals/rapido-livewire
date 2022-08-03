@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Welcome to Rapido</h1>
+                <h1>{{__('messages.welcome')}}</h1>
             </div>
         </div>
         <div class="row">
