@@ -12,7 +12,7 @@ class MakeUserRevisor extends Command
     *
     * @var string
     */
-    protected $signature = 'rapido:makeUserRevisor';
+    protected $signature = 'rapido:makeUserRevisor {email}';
     // protected $signature = 'rapido:makeUserRevisor {email}'; alternativa
     
     /**
@@ -30,9 +30,9 @@ class MakeUserRevisor extends Command
     public function handle()
     {
         
-        $email = $this->ask("Introducir el correo del usuario");
-        $user = User::where('email', $email)->first(); 
-        // $user = User::where('email', $this->argument('email'))->first(); alternativa
+        // $email = $this->ask("Introducir el correo del usuario");
+        // $user = User::where('email', $email)->first(); 
+        $user = User::where('email', $this->argument('email'))->first();
 
         if(!$user){
             $this->error("Usuario no encontrado");

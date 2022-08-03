@@ -6,7 +6,7 @@
             </div>
             <div class="col-12 col-md-6 text-end">
                 <a href="#" class="text-white text-decoration-none">Policy</a>
-                <a href="#" class="text-white text-decoration-none">Work with us</a>
+                <a href="{{route('revisor.become')}}" class="btn btn-info">Work with us</a>
                 <a href="#" class="text-white text-decoration-none">Facebook</a>
                 <a href="#" class="text-white text-decoration-none">Instagram</a>
             </div>
