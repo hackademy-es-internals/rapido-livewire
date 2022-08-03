@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RevisorMiddleware
+class IsRevisor
 {
     /**
     * Handle an incoming request.
@@ -18,7 +18,7 @@ class RevisorMiddleware
     public function handle(Request $request, Closure $next)
     {
         
-        if(Auth::user() && Auth::user()->is_revisor)
+        if(Auth::check() && Auth::user()->is_revisor)
         return $next($request);
         
         return redirect()->route('home')->with(['type'=>'danger','message'=>'Acceso denegado, no eres un revisor, pregunta al administrador']);

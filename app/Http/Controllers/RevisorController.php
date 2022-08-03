@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class RevisorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth.revisor');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth.revisor');
+    // }
     
     public function index()
     {
@@ -21,19 +21,15 @@ class RevisorController extends Controller
     }
     
     
-    public function accept($ad_id)
+    public function acceptAd(Ad $ad)
     {
-        return $this->setAccepted($ad_id,true);
+        $ad->setAccepted(true);
+        return redirect()->back()->with(['type'=>'success','message'=>'Anuncio aceptado']);
     }
-    public function reject($ad_id)
+    public function rejectAd(Ad $ad)
     {
-        return $this->setAccepted($ad_id,false);
-    }
-    private function setAccepted($ad_id,$value)
-    {
-        $ad = Ad::find($ad_id);
-        $ad->is_accepted = $value;
-        $ad->save();
-        return redirect()->route('revisor.home');
+        $ad->setAccepted(false);
+        return redirect()->back()->with(['type'=>'danger','message'=>'Anuncio rechazado']);
+
     }
 }
