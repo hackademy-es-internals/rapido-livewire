@@ -23,4 +23,10 @@ class Ad extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    
+    static public function ToBeRevisionedCount()
+    {
+        return Ad::where('is_accepted', null)->count();
+    }
 }

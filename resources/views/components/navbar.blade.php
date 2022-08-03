@@ -19,11 +19,11 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categorias
           </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          @foreach ($categories as $category)
-          <li><a class="dropdown-item" href="{{route('category.ads',$category)}}">{{$category->name}}</a></li>
-          @endforeach
-        </ul>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach ($categories as $category)
+            <li><a class="dropdown-item" href="{{route('category.ads',$category)}}">{{$category->name}}</a></li>
+            @endforeach
+          </ul>
         </li>
         @guest
         @if (Route::has('login'))
@@ -44,6 +44,16 @@
             New Ad
           </a>
         </li>
+        @if (Auth::user()->is_revisor)
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('revisor.home') }}">
+            Revisor Casa
+            <span class="badge rounded-pill bg-danger">
+              {{\App\Models\Ad::ToBeRevisionedCount() }}
+            </span>
+          </a>
+        </li>
+        @endif
         <li class="nav-item">
           <form id="logoutForm" action="{{route('logout')}}" method="POST">
             @csrf
