@@ -57,14 +57,16 @@
                 </div>
                 <div class="row my-3">
                     <div class="col-6">
-                        <form action="{{route('revisor.ad.reject',['id'=>$ad->id])}}" method="POST">
+                        <form action="{{route('revisor.ad.reject',$ad)}}" method="POST">
                             @csrf
+                            @method('PATCH')
                             <button type="submit" class="btn btn-danger">Rechazar</button>
                         </form>
                     </div>
                     <div class="col-6 text-end">
-                        <form action="{{route('revisor.ad.accept',['id'=>$ad->id])}}" method="POST">
+                        <form action="{{route('revisor.ad.accept',$ad)}}" method="POST">
                             @csrf
+                            @method('PATCH')
                             <button type="submit" class="btn btn-success">Aceptar</button>
                         </form>
                     </div>
