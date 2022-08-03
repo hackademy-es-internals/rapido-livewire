@@ -14,7 +14,7 @@ class PublicController extends Controller
         $ads = Ad::where('is_accepted', true)->orderBy('created_at','desc')->take(6)->get(); // sort in db
         return view('welcome',compact('ads'));
     }
-
+    
     public function show(Ad $ad)
     {
         return view('ad.show',compact('ad'));
@@ -26,4 +26,9 @@ class PublicController extends Controller
     }
     
     
+    public function setLocale($locale)
+    {
+        session()->put('locale', $locale);
+        return redirect()->back();
+    }
 }
