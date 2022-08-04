@@ -10,18 +10,18 @@
           <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Quienes somos</a>
+          <a class="nav-link" href="#">{{__('Quienes somos')}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Donde estamos</a>
+          <a class="nav-link" href="#">{{__('Dónde estamos')}}</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorias
+            {{__('Categorías')}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @foreach ($categories as $category)
-            <li><a class="dropdown-item" href="{{route('category.ads',$category)}}">{{$category->name}}</a></li>
+            <li><a class="dropdown-item" href="{{route('category.ads',$category)}}">{{__($category->name)}}</a></li>
             @endforeach
           </ul>
         </li>
@@ -29,39 +29,45 @@
         @if (Route::has('login'))
         <li class="nav-item ">
           <a class="nav-link"
-          href="{{route('login')}}"><span>Login</span></a>
+          href="{{route('login')}}"><span>{{__('Entrar')}}</span></a>
         </li>
         @endif    
         @if (Route::has('register'))
         <li class="nav-item">
           <a class="nav-link"
-          href="{{route('register')}}"><span>Register</span></a>
+          href="{{route('register')}}"><span>{{__('Registrar')}}</span></a>
         </li>
         @endif
         @else
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('ads.create') }}">
-            New Ad
+          <a class="nav-link btn btn-info" href="{{ route('ads.create') }}">
+            {{__('Nuevo Anuncio')}}
           </a>
         </li>
-        @if (Auth::user()->is_revisor)
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('revisor.home') }}">
-            Revisor
-            <span class="badge rounded-pill bg-danger">
-              {{\App\Models\Ad::ToBeRevisionedCount() }}
-            </span>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{Auth::user()->name}}
           </a>
-        </li>
-        @endif
-        <li class="nav-item">
-          <form id="logoutForm" action="{{route('logout')}}" method="POST">
-            @csrf
-          </form>
-          <a id="logoutBtn" class="nav-link" href="#">Logout</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @if (Auth::user()->is_revisor)
+            <li>
+              <a class="dropdown-item" href="{{ route('revisor.home') }}">
+                {{__('Revisor')}}
+                <span class="badge rounded-pill bg-danger">
+                  {{\App\Models\Ad::ToBeRevisionedCount() }}
+                </span>
+              </a>
+            </li>
+            @endif
+            <li>
+              <form id="logoutForm" action="{{route('logout')}}" method="POST">
+                @csrf
+              </form>
+              <a id="logoutBtn" class="dropdown-item" href="#">{{__('Salir')}}</a>
+            </li>
+          </ul>
         </li>
         @endguest
-        
         <li class="nav-item">
           <x-locale lang="en" country="gb" />
         </li>
