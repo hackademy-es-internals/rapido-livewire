@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,5 +35,10 @@ class Ad extends Model
     static public function ToBeRevisionedCount()
     {
         return Ad::where('is_accepted', null)->count();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
