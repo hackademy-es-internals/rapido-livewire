@@ -11,7 +11,7 @@
             @forelse($ads as $ad)
             <div class="col-12 col-md-4">
                 <div class="card mb-5">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                    <img src="{{!$ad->images()->get()->isEmpty() ? Storage::url($ad->images()->first()->path) : 'https://via.placeholder.com/150' }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"> {{$ad->title}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{$ad->price}}</h6>
@@ -34,6 +34,6 @@
             </div>
             @endforelse
         </div>
-    {{$ads->links()}}
+        {{$ads->links()}}
     </div>
 </x-layout>
