@@ -14,7 +14,9 @@
 </head>
 <body>
     <x-navbar />
-    <x-alert :type="session('type')" :message="session('message')"/>
+    @if (session()->has('message'))
+        <x-alert :type="session('message')['type']" :message="session('message')['text']"/>
+    @endif
     {{$slot}}
     <x-footer />
 

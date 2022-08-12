@@ -29,25 +29,25 @@ class RevisorController extends Controller
     public function acceptAd(Ad $ad)
     {
         $ad->setAccepted(true);
-        return redirect()->back()->with(['type'=>'success','message'=>'Anuncio aceptado']);
+        return redirect()->back()->withMessage(['type'=>'success','text'=>'Anuncio aceptado']);
     }
 
     public function rejectAd(Ad $ad)
     {
         $ad->setAccepted(false);
-        return redirect()->back()->with(['type'=>'danger','message'=>'Anuncio rechazado']);
+        return redirect()->back()->withMessage(['type'=>'danger','text'=>'Anuncio rechazado']);
 
     }
 
     public function becomeRevisor()
     {
         Mail::to('admin@rapido.es')->send(new BecomeRevisor(Auth::user()));
-        return redirect()->route('home')->with(['type'=>'success','message'=>'Solicitud enviada con éxito, pronto sabrás algo, gracias!']);
+        return redirect()->route('home')->withMessage(['type'=>'success','text'=>'Solicitud enviada con éxito, pronto sabrás algo, gracias!']);
     }
 
     public function makeRevisor(User $user)
     {
         Artisan::call('rapido:makeUserRevisor',['email'=>$user->email]);
-        return redirect()->route('home')->with(['type'=>'success','message'=>'Ya tenemos un compañero más']);
+        return redirect()->route('home')->withMessage(['type'=>'success','text'=>'Ya tenemos un compañero más']);
     }
 }
