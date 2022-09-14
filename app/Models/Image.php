@@ -28,8 +28,6 @@ class Image extends Model
         $filename = basename($filePath);
         $file = "{$path}/crop_{$w}x{$h}_{$filename}";
 
-        dd($file);
-
         return Storage::url($file);
     }
     public function getUrl($w = null, $h = null)
