@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Jobs\ResizeImage;
 use Livewire\WithFileUploads;
+use App\Jobs\GoogleVisionLabelImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Jobs\GoogleVisionSafeSearchImage;
@@ -87,6 +88,7 @@ class CreateAd extends Component
                 ]);
                 dispatch(new ResizeImage($newImage->path,400,300));
                 dispatch(new GoogleVisionSafeSearchImage($newImage->id));
+                dispatch(new GoogleVisionLabelImage($newImage->id));
             }
 
             File::deleteDirectory(storage_path('/app/livewire-tmp'));

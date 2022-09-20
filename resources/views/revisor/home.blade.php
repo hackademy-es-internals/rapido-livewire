@@ -21,15 +21,21 @@
                                             <img src="{{$image->getUrl(400,300)}}" alt="" class="img-fluid">
                                         </div>
                                         <div class="col-md-8">
-                                            Adult : <i class="bi bi-circle-fill {{ $image->adult}}"></i> [{{ $image->adult}}] <br>
-                                            Spoof : <i class="bi bi-circle-fill {{ $image->spoof}}"></i> [{{ $image->spoof}}] <br>
-                                            Medical : <i class="bi bi-circle-fill {{ $image->medical}}"></i> [{{ $image->medical}}] <br>
-                                            Violence : <i class="bi bi-circle-fill {{ $image->violence}}"></i> [{{ $image->violence}}] <br>
-                                            Racy : <i class="bi bi-circle-fill {{ $image->racy}}"></i> [{{ $image->racy}}] <br>
+                                            <b>Safe Search</b> <br>
+                                            <b>Adult :</b> <i class="bi bi-circle-fill {{ $image->adult}}"></i> [{{ $image->adult}}] <br>
+                                            <b>Spoof :</b> <i class="bi bi-circle-fill {{ $image->spoof}}"></i> [{{ $image->spoof}}] <br>
+                                            <b>Medical :</b> <i class="bi bi-circle-fill {{ $image->medical}}"></i> [{{ $image->medical}}] <br>
+                                            <b>Violence :</b> <i class="bi bi-circle-fill {{ $image->violence}}"></i> [{{ $image->violence}}] <br>
+                                            <b>Racy :</b> <i class="bi bi-circle-fill {{ $image->racy}}"></i> [{{ $image->racy}}] <br><br>
                                             
-                                            id: {{ $image->id}} <br>
-                                            path: {{ $image->path}} <br>
-                                            url: {{ Storage:: url($image->path)}} <br>
+                                            <b>Labels</b><br>
+                                            @foreach ($image->labels as $label) 
+                                            <a href="#" class="btn btn-info btn-sm m-1">{{$label}}</a>
+                                            @endforeach 
+                                            <br><br>
+                                            <b>Id:</b> {{ $image->id}} <br>
+                                            <b>Uri:</b> {{ Storage::url($image->path)}} <br>
+                                            
                                         </div>
                                     </div>
                                     @empty
