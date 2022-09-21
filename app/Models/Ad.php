@@ -6,13 +6,21 @@ use App\Models\User;
 use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Laravel\Scout\Searchable;
 class Ad extends Model
 {
     protected $fillable = ['title','body','price'];
     
-    use HasFactory;
+    use Searchable,HasFactory;
     
+    
+    public function toSearchableArray()
+    {
+        return [
+            'title'=>$this->title,
+            'body'=>$this->body,
+        ];
+    }
     
     public function category()
     {
@@ -36,7 +44,7 @@ class Ad extends Model
     {
         return Ad::where('is_accepted', null)->count();
     }
-
+    
     public function images()
     {
         return $this->hasMany(Image::class);
