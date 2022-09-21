@@ -4,7 +4,9 @@ namespace App\Jobs;
 
 use App\Models\Image;
 use Illuminate\Bus\Queueable;
+use Spatie\Image\Manipulations;
 use Illuminate\Queue\SerializesModels;
+use Spatie\Image\Image as SpatieImage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,22 +41,39 @@ class GoogleVisionRemoveFaces implements ShouldQueue
         if(!$i){
             return;
         }
-        
-        $image = file_get_contents(storage_path('app/public/'.$i->path));
+        $srcPath = storage_path('app/public/'.$i->path);
+    
+        $image = file_get_contents($srcPath);
         
         putenv('GOOGLE_APPLICATION_CREDENTIALS='.base_path('google_credentials.json'));
         
         $imageAnnotator = new ImageAnnotatorClient();
         $response = $imageAnnotator->faceDetection($image);
         $imageAnnotator->close();
-
+        
         $faces = $response->getFaceAnnotations();
+        
         foreach ($faces as $face) {
+            // recuperar los vertices del poligono de la cara
             $vertices = $face->getBoundingPoly()->getVertices();
-            echo "face\n";
+            $bounds = [];
+            // guardar los puntos del poligono de la cara en parejas x,y
             foreach ($vertices as  $vertex) {
-                echo $vertex->getX() . "," . $vertex->getY() . "\n";
+                $bounds[] = [$vertex->getX(),$vertex->getY()];
             }
+            // calcular altura y anchura
+            $w = $bounds[2][0] - $bounds[0][0];
+            $h = $bounds[2][1] - $bounds[0][1];
+            // cargar la imagen
+            $image = SpatieImage::load($srcPath);
+            // modificar la imagen con Spatie Image
+            $image->watermark(base_path('resources/images/smile.png'))
+            ->watermarkPosition('top-left')
+            ->watermarkPadding($bounds[0][0],$bounds[0][1])
+            ->watermarkWidth($w,Manipulations::UNIT_PIXELS)
+            ->watermarkHeight($h,Manipulations::UNIT_PIXELS)
+            ->watermarkFit(Manipulations::FIT_STRETCH);
+            $image->save($srcPath);
         }
     }
 }
