@@ -29,9 +29,11 @@
                                             <b>Racy :</b> <i class="bi bi-circle-fill {{ $image->racy}}"></i> [{{ $image->racy}}] <br><br>
                                             
                                             <b>Labels</b><br>
-                                            @foreach ($image->labels as $label) 
+                                            @forelse ($image->labels as $label) 
                                             <a href="#" class="btn btn-info btn-sm m-1">{{$label}}</a>
-                                            @endforeach 
+                                            @empty
+                                            No labels
+                                            @endforelse
                                             <br><br>
                                             <b>Id:</b> {{ $image->id}} <br>
                                             <b>Uri:</b> {{ Storage::url($image->path)}} <br>
