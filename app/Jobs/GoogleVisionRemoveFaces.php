@@ -61,6 +61,7 @@ class GoogleVisionRemoveFaces implements ShouldQueue
             foreach ($vertices as  $vertex) {
                 $bounds[] = [$vertex->getX(),$vertex->getY()];
             }
+            
             // calcular altura y anchura
             $w = $bounds[2][0] - $bounds[0][0];
             $h = $bounds[2][1] - $bounds[0][1];
